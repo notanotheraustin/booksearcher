@@ -1,12 +1,10 @@
-// Initialize reading lists
 const readingLists = {
   currentlyReading: [],
   toBeRead: [],
   finishedReading: [],
 };
 
-// Your Google Books API key
-const API_KEY = ''; // Replace with your actual API key
+const API_KEY = ''; 
 
 document.getElementById('search-button').addEventListener('click', function () {
   const query = document.getElementById('search-input').value;
@@ -16,14 +14,14 @@ document.getElementById('search-button').addEventListener('click', function () {
     return;
   }
 
-  // Fetch data from Google Books API with the API key
+  
   fetch(
     `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${API_KEY}`
   )
     .then(response => response.json())
     .then(data => {
       const resultsContainer = document.getElementById('results');
-      resultsContainer.innerHTML = ''; // Clear previous results
+      resultsContainer.innerHTML = ''; 
 
       if (data.items && data.items.length > 0) {
         data.items.forEach(item => {
@@ -57,7 +55,7 @@ document.getElementById('search-button').addEventListener('click', function () {
           resultsContainer.appendChild(bookCard);
         });
 
-        // Add event listeners for clickable titles
+        
         document.querySelectorAll('.clickable-title').forEach(title => {
           title.addEventListener('click', function () {
             const bookId = this.getAttribute('data-id');
@@ -65,7 +63,7 @@ document.getElementById('search-button').addEventListener('click', function () {
           });
         });
 
-        // Add event listeners for bookmark buttons
+        
         document.querySelectorAll('.bookmark-button').forEach(button => {
           button.addEventListener('click', function () {
             const bookId = this.getAttribute('data-id');
@@ -84,7 +82,7 @@ document.getElementById('search-button').addEventListener('click', function () {
     });
 });
 
-// Fetch detailed book information
+
 function fetchBookDetails(bookId) {
   fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}?key=${API_KEY}`)
     .then(response => response.json())
@@ -103,7 +101,7 @@ function fetchBookDetails(bookId) {
     });
 }
 
-// Bookmark a book into a reading list
+
 function bookmarkBook(bookId, bookTitle) {
   const list = prompt(
     'Add to which list? (currentlyReading, toBeRead, finishedReading)'
