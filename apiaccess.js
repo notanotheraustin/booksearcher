@@ -6,7 +6,7 @@ const readingLists = {
 };
 
 // Your Google Books API key
-const API_KEY = 'AIzaSyCdbFQOUrTEBlYQ_U0TvD3DBoiunECvN-s'; // Replace with your actual API key
+const API_KEY = ''; // Replace with your actual API key
 
 document.getElementById('search-button').addEventListener('click', function () {
   const query = document.getElementById('search-input').value;
