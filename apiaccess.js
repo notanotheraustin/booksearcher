@@ -5,6 +5,9 @@ const readingLists = {
   finishedReading: [],
 };
 
+// Your Google Books API key
+const API_KEY = 'AIzaSyCdbFQOUrTEBlYQ_U0TvD3DBoiunECvN-s'; // Replace with your actual API key
+
 document.getElementById('search-button').addEventListener('click', function () {
   const query = document.getElementById('search-input').value;
 
@@ -13,9 +16,9 @@ document.getElementById('search-button').addEventListener('click', function () {
     return;
   }
 
-  // Fetch data from Google Books API
+  // Fetch data from Google Books API with the API key
   fetch(
-    `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`
+    `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${API_KEY}`
   )
     .then(response => response.json())
     .then(data => {
@@ -83,7 +86,7 @@ document.getElementById('search-button').addEventListener('click', function () {
 
 // Fetch detailed book information
 function fetchBookDetails(bookId) {
-  fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
+  fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}?key=${API_KEY}`)
     .then(response => response.json())
     .then(data => {
       const book = data.volumeInfo;
@@ -110,8 +113,6 @@ function bookmarkBook(bookId, bookTitle) {
     alert(`Book added to ${list} list!`);
     console.log(readingLists); // For debugging
   } else {
-    alert(
-      'Invalid list. Please choose: currentlyReading, toBeRead, or finishedReading.'
-    );
+    alert('Invalid list. Please choose: currentlyReading, toBeRead, or finishedReading.');
   }
 }
